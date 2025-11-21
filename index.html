@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markit.one - The Unified Marketing Stack</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        midnight: '#050511',
+                        surface: '#13162D', /* Lightened for better visibility */
+                        electric: '#2D7FF9',
+                        cyan: '#00E5FF',
+                        purple: '#8B5CF6',
+                        card: 'rgba(255, 255, 255, 0.03)',
+                        cardHover: 'rgba(255, 255, 255, 0.08)',
+                        cardBorder: 'rgba(255, 255, 255, 0.12)' /* Increased contrast */
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    boxShadow: {
+                        'glow': '0 0 50px -10px rgba(45, 127, 249, 0.2)',
+                        'card': '0 20px 40px -10px rgba(0, 0, 0, 0.5)',
+                        'highlight': '0 0 0 1px rgba(255,255,255,0.1)',
+                    },
+                    backgroundImage: {
+                        'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/200%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E')",
+                        'gradient-card': 'linear-gradient(145deg, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0.02) 100%)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Styles -->
+    <style>
+        body {
+            background-color: #050511;
+            color: #F1F5F9;
+            overflow-x: hidden;
+        }
+
+        .bg-noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Grid Layout */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .bento-grid {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(3, 260px); /* Slightly taller for better visibility */
+            }
+        }
+
+        /* Card Styles - Improved Visibility */
+        .bento-card {
+            display: flex;
+            flex-direction: column;
+            background-color: #13162D; /* Distinct surface color */
+            background-image: var(--tw-gradient-card);
+            border: 1px solid var(--tw-colors-cardBorder);
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease-out;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2); /* Subtle depth by default */
+        }
+
+        /* Hover Effects */
+        @media (hover: hover) {
+            .bento-card:hover {
+                border-color: rgba(45, 127, 249, 0.5);
+                box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(45, 127, 249, 0.1);
+                transform: translateY(-4px);
+                z-index: 20;
+            }
+            .bento-card:hover .card-icon {
+                transform: scale(1.1) rotate(5deg);
+                background-color: rgba(255,255,255,0.15);
+            }
+        }
+
+        .bento-card:active {
+            transform: scale(0.98);
+        }
+
+        /* Specific Spans */
+        @media (min-width: 768px) {
+            .span-large { grid-column: span 2; grid-row: span 2; }
+            .span-medium { grid-column: span 1; grid-row: span 2; }
+            .span-wide { grid-column: span 2; grid-row: span 1; }
+        }
+
+        /* Animations */
+        .chart-bar {
+            transform-origin: bottom;
+            transform: scaleY(0);
+            animation: growBar 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        @keyframes growBar { to { transform: scaleY(1); } }
+
+        .float { animation: float 6s ease-in-out infinite; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Abstract UI elements */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-electric selection:text-white">
+
+    <div class="bg-noise"></div>
+    
+    <!-- Background Glows -->
+    <div class="fixed top-[-20%] left-[-10%] w-[50vw] h-[50vw] bg-electric opacity-[0.08] blur-[120px] rounded-full pointer-events-none"></div>
+    <div class="fixed bottom-[-10%] right-[-5%] w-[40vw] h-[40vw] bg-purple opacity-[0.06] blur-[100px] rounded-full pointer-events-none"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 border-b border-white/10 bg-midnight/90 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-electric to-cyan-500 flex items-center justify-center shadow-lg shadow-electric/20">
+                    <span class="text-white font-bold font-mono">M</span>
+                </div>
+                <span class="font-bold text-xl tracking-tight text-white">Markit.one</span>
+            </div>
+            <button class="md:hidden text-gray-300 hover:text-white p-2">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="#" class="hover:text-white transition-colors">Product</a>
+                <a href="#" class="hover:text-white transition-colors">Solutions</a>
+                <a href="#" class="hover:text-white transition-colors">Pricing</a>
+            </div>
+            <div class="hidden md:flex items-center gap-4">
+                <a href="#" class="text-sm font-medium text-gray-300 hover:text-white">Log in</a>
+                <button class="px-5 py-2 rounded-full bg-white text-midnight text-sm font-bold hover:bg-gray-200 transition-all">
+                    Start Building
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-24 px-4 min-h-screen flex flex-col justify-center items-center">
+        
+        <!-- Hero Content -->
+        <div class="text-center max-w-3xl mx-auto mb-20 hero-content relative z-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-blue-300 text-xs font-mono mb-8 backdrop-blur-sm">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                </span>
+                Unified Workspace v2.0
+            </div>
+            <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold leading-[1.1] mb-6 tracking-tight text-white drop-shadow-sm">
+                One hub, many<br class="hidden md:block" /> SaaS tools.
+            </h1>
+            <p class="text-lg md:text-xl text-gray-400 mb-10 max-w-xl mx-auto leading-relaxed">
+                Replace your fragmented stack with a single, powerful workspace for forms, QR codes, and video generation.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+                <button class="w-full sm:w-auto px-8 py-4 rounded-full bg-electric text-white font-semibold hover:bg-blue-600 hover:shadow-glow transition-all duration-300 text-sm">
+                    Get Started Free
+                </button>
+                <button class="w-full sm:w-auto px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white font-medium hover:bg-white/10 transition-all text-sm flex items-center justify-center gap-2">
+                    <i class="fa-regular fa-circle-play"></i> Watch Demo
+                </button>
+            </div>
+        </div>
+
+        <!-- Bento Grid -->
+        <div class="bento-grid w-full relative z-10" id="grid-container">
+
+            <!-- Cell 1: FormEase (Large) -->
+            <a href="https://formease.xyz" target="_blank" class="bento-card span-large group relative overflow-hidden cursor-pointer" aria-label="Go to FormEase">
+                <!-- Content -->
+                <div class="p-6 md:p-8 h-full flex flex-col relative z-10">
+                    <div class="flex justify-between items-start mb-8">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 card-icon transition-transform duration-300">
+                                <i class="fa-solid fa-chart-simple"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                                    FormEase 
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px] opacity-50"></i>
+                                </h3>
+                                <p class="text-xs text-purple-300 font-mono mt-0.5">ANALYTICS DASHBOARD</p>
+                            </div>
+                        </div>
+                        <div class="px-3 py-1 rounded-lg bg-green-900/30 border border-green-500/30 text-green-400 text-xs font-medium flex items-center gap-1.5">
+                            <i class="fa-solid fa-arrow-trend-up text-[10px]"></i>
+                            128% YoY
+                        </div>
+                    </div>
+
+                    <!-- Chart Visual -->
+                    <div class="flex-1 relative w-full flex items-end justify-between gap-2 sm:gap-4 px-2">
+                        <div class="absolute left-0 bottom-0 w-full h-px bg-white/10"></div>
+                        
+                        <div class="w-full bg-white/5 rounded-t sm:rounded-t-md h-[35%] chart-bar relative" style="animation-delay: 0.1s"></div>
+                        <div class="w-full bg-white/5 rounded-t sm:rounded-t-md h-[50%] chart-bar relative" style="animation-delay: 0.2s"></div>
+                        <div class="w-full bg-white/5 rounded-t sm:rounded-t-md h-[45%] chart-bar relative" style="animation-delay: 0.3s"></div>
+                        
+                        <!-- Highlight Bar -->
+                        <div class="w-full bg-gradient-to-t from-electric/50 to-electric rounded-t sm:rounded-t-md h-[85%] chart-bar relative shadow-[0_0_20px_rgba(45,127,249,0.3)]" style="animation-delay: 0.4s">
+                            <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-midnight border border-white/20 px-2 py-1 rounded text-xs font-mono whitespace-nowrap opacity-100">
+                                4.2k
+                            </div>
+                        </div>
+                        
+                        <div class="w-full bg-white/5 rounded-t sm:rounded-t-md h-[60%] chart-bar relative" style="animation-delay: 0.5s"></div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Cell 2: QRBee (Medium) -->
+            <a href="https://qrbee.io" target="_blank" class="bento-card span-medium group relative cursor-pointer overflow-hidden" aria-label="Go to QRBee">
+                <div class="absolute top-[-50px] right-[-50px] w-40 h-40 bg-cyan-500/10 blur-[60px] rounded-full"></div>
+
+                <div class="p-6 h-full flex flex-col relative z-10">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 card-icon transition-transform duration-300">
+                            <i class="fa-solid fa-qrcode"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                                QRBee 
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px] opacity-50"></i>
+                            </h3>
+                            <p class="text-xs text-cyan-300 font-mono mt-0.5">DYNAMIC GENERATOR</p>
+                        </div>
+                    </div>
+
+                    <!-- Styled QR Widget -->
+                    <div class="flex-1 flex flex-col items-center justify-center">
+                        <div class="bg-white p-3 rounded-2xl shadow-xl relative group-hover:scale-105 transition-transform duration-300">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://qrbee.io&color=0A0A23&bgcolor=FFFFFF&margin=2" alt="QRBee Link" class="w-32 h-32 rounded-lg mix-blend-multiply opacity-90">
+                        </div>
+                        <div class="mt-6 w-full px-2">
+                            <div class="flex justify-between text-[10px] font-mono text-gray-400 mb-2 uppercase tracking-wider">
+                                <span>Daily Scans</span>
+                                <span class="text-white">1,240</span>
+                            </div>
+                            <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                                <div class="bg-gradient-to-r from-cyan-400 to-blue-500 h-full w-[75%] animate-[pulse_3s_infinite]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Cell 3: AdVerse (Small) -->
+            <a href="https://adverse.media" target="_blank" class="bento-card p-6 flex flex-col justify-between group relative overflow-hidden cursor-pointer" aria-label="Go to AdVerse">
+                <div class="flex justify-between items-start relative z-10">
+                    <div class="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 card-icon transition-transform duration-300">
+                        <i class="fa-solid fa-clapperboard"></i>
+                    </div>
+                    <div class="flex items-center gap-2">
+                         <div class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></div>
+                         <span class="text-[10px] font-mono text-red-400 uppercase">Rec</span>
+                    </div>
+                </div>
+                
+                <!-- Timeline UI -->
+                <div class="mt-6 relative z-10">
+                    <h3 class="text-lg font-bold text-white mb-0.5 flex items-center gap-2">
+                        AdVerse
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px] opacity-50"></i>
+                    </h3>
+                    <p class="text-xs text-red-300 font-mono mb-4">AI VIDEO STUDIO</p>
+                    
+                    <div class="glass-panel p-2 rounded-lg flex items-center gap-2 group-hover:bg-white/10 transition-colors">
+                        <div class="w-6 h-6 rounded-full bg-white text-midnight flex items-center justify-center text-[10px]">
+                            <i class="fa-solid fa-play ml-0.5"></i>
+                        </div>
+                        <div class="flex-1 h-8 flex gap-0.5 overflow-hidden opacity-60">
+                            <div class="w-1/3 h-full bg-white/20 rounded-sm"></div>
+                            <div class="w-1/4 h-full bg-red-500/40 rounded-sm"></div>
+                            <div class="w-full h-full bg-white/10 rounded-sm"></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Cell 4: Stack (Small) -->
+            <div class="bento-card p-6 flex flex-col items-center justify-center relative overflow-hidden">
+                <div class="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
+                     <i class="fa-solid fa-puzzle-piece text-9xl text-white"></i>
+                </div>
+                <div class="relative z-10 text-center">
+                    <div class="flex items-center justify-center -space-x-3 mb-4 float">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/slack/slack-original.svg" alt="Slack" class="w-10 h-10 rounded-full bg-gray-800 p-1 border-2 border-midnight shadow-lg">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" class="w-10 h-10 rounded-full bg-gray-800 p-1.5 border-2 border-midnight shadow-lg">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google" class="w-10 h-10 rounded-full bg-white p-1.5 border-2 border-midnight shadow-lg">
+                        <div class="w-10 h-10 rounded-full bg-gray-700 border-2 border-midnight flex items-center justify-center text-[10px] font-bold text-white">
+                            +20
+                        </div>
+                    </div>
+                    <h4 class="text-sm font-medium text-gray-300">Seamless Integrations</h4>
+                </div>
+            </div>
+
+            <!-- Cell 5: CTA (Wide) -->
+            <a href="#" class="bento-card span-wide flex flex-row items-center justify-between p-6 md:p-8 bg-gradient-to-r from-electric/20 via-transparent to-transparent border-electric/30 group cursor-pointer" aria-label="Get Started">
+                <div class="flex flex-col max-w-[70%]">
+                    <span class="text-xs font-mono text-blue-300 mb-2 uppercase tracking-wider">Limited Offer</span>
+                    <h3 class="text-xl md:text-2xl font-bold text-white mb-1 group-hover:translate-x-1 transition-transform">Start for free today.</h3>
+                    <p class="text-sm text-gray-400 hidden md:block">No credit card required. 14-day trial on Pro plans.</p>
+                </div>
+                <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/10 border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-midnight transition-all duration-300 shadow-lg">
+                    <i class="fa-solid fa-arrow-right text-lg -rotate-45 group-hover:rotate-0 transition-transform duration-300"></i>
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 bg-black/40 py-12">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-sm text-gray-500">
+                &copy; 2025 Markit.one Inc.
+            </div>
+            <div class="flex gap-6">
+                <a href="#" class="text-gray-500 hover:text-white transition-colors text-xl"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" class="text-gray-500 hover:text-white transition-colors text-xl"><i class="fa-brands fa-github"></i></a>
+                <a href="#" class="text-gray-500 hover:text-white transition-colors text-xl"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script>
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Animation
+        const tl = gsap.timeline();
+        tl.from(".hero-content > *", {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.1,
+            ease: "power3.out"
+        });
+
+        // Grid Entrance - Improved Trigger
+        gsap.from(".bento-card", {
+            scrollTrigger: {
+                trigger: ".bento-grid",
+                start: "top 95%", // Triggers almost immediately when grid enters view
+                toggleActions: "play none none none" // Only plays once, doesn't reset
+            },
+            y: 40,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: "power2.out",
+            clearProps: "opacity, transform" // Ensures css takes over after animation
+        });
+
+        // Parallax Effect (Desktop)
+        if (window.matchMedia("(min-width: 768px)").matches) {
+            document.addEventListener("mousemove", (e) => {
+                const mouseX = e.clientX / window.innerWidth - 0.5;
+                const mouseY = e.clientY / window.innerHeight - 0.5;
+
+                gsap.to(".bento-card", {
+                    duration: 1,
+                    x: mouseX * 8,
+                    y: mouseY * 8,
+                    rotationY: mouseX * 2,
+                    rotationX: -mouseY * 2,
+                    ease: "power2.out",
+                    stagger: 0.02
+                });
+            });
+        }
+    </script>
+</body>
+</html>
