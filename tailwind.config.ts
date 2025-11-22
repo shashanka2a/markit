@@ -6,17 +6,18 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        midnight: '#020205', // Deeper black/blue
-        surface: '#0B0D1B', // Richer dark blue
-        electric: '#2D7FF9',
-        cyan: '#00E5FF',
-        purple: '#8B5CF6',
-        card: 'rgba(255, 255, 255, 0.02)',
-        cardHover: 'rgba(255, 255, 255, 0.05)',
-        cardBorder: 'rgba(255, 255, 255, 0.08)',
+        midnight: 'var(--midnight)',
+        surface: 'var(--surface)',
+        electric: 'var(--electric)',
+        cyan: 'var(--cyan)',
+        purple: 'var(--purple)',
+        card: 'var(--card)',
+        cardHover: 'var(--card-hover)',
+        cardBorder: 'var(--card-border)',
       },
       fontFamily: {
         sans: ['"Plus Jakarta Sans"', 'sans-serif'],

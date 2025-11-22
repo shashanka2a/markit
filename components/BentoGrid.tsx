@@ -81,25 +81,23 @@ export default function BentoGrid() {
         className="bento-card span-large group relative overflow-hidden cursor-pointer hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-500"
         aria-label="Go to FormEase"
         style={{
-          background: "radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.06), transparent 40%)",
-          backgroundColor: "#13162D",
-          backgroundImage: 'radial-gradient(#444 1px, transparent 1px)',
-          backgroundSize: '16px 16px'
+          background: "radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), var(--card-hover), transparent 40%)",
+          backgroundColor: "var(--card)"
         }}
       >
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(139,92,246,0.1),transparent_50%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
         <div className="p-6 md:p-8 h-full flex flex-col relative z-10">
           <div className="flex justify-between items-start mb-8">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 card-icon transition-transform duration-300">
+              <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-400 card-icon transition-transform duration-300">
                 <i className="fa-solid fa-chart-simple"></i>
               </div>
               <div>
-                <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
                   FormEase
                   <i className="fa-solid fa-arrow-up-right-from-square text-[10px] opacity-50"></i>
                 </h3>
-                <p className="text-xs text-purple-300 font-mono mt-0.5">ANALYTICS DASHBOARD</p>
+                <p className="text-xs text-purple-600 dark:text-purple-300 font-mono mt-0.5">ANALYTICS DASHBOARD</p>
               </div>
             </div>
             <div className="px-3 py-1 rounded-lg bg-green-900/30 border border-green-500/30 text-green-400 text-xs font-medium flex items-center gap-1.5">
@@ -136,8 +134,8 @@ export default function BentoGrid() {
         className="bento-card span-medium group relative cursor-pointer overflow-hidden hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500"
         aria-label="Go to QRBee"
         style={{
-          background: "radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.06), transparent 40%)",
-          backgroundColor: "#13162D"
+          background: "radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), var(--card-hover), transparent 40%)",
+          backgroundColor: "var(--card)"
         }}
       >
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(0,229,255,0.1),transparent_50%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -149,11 +147,11 @@ export default function BentoGrid() {
               <i className="fa-solid fa-qrcode"></i>
             </div>
             <div>
-              <h3 className="text-lg font-bold text-white flex items-center gap-2">
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
                 QRBee
                 <i className="fa-solid fa-arrow-up-right-from-square text-[10px] opacity-50"></i>
               </h3>
-              <p className="text-xs text-cyan-300 font-mono mt-0.5">DYNAMIC GENERATOR</p>
+              <p className="text-xs text-cyan-600 dark:text-cyan-300 font-mono mt-0.5">DYNAMIC GENERATOR</p>
             </div>
           </div>
 
@@ -169,7 +167,7 @@ export default function BentoGrid() {
             <div className="mt-6 w-full px-2">
               <div className="flex justify-between text-[10px] font-mono text-gray-400 mb-2 uppercase tracking-wider">
                 <span>Daily Scans</span>
-                <span className="text-white">1,240</span>
+                <span className="text-slate-900 dark:text-white">1,240</span>
               </div>
               <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
                 <div className="bg-gradient-to-r from-cyan-400 to-blue-500 h-full w-[75%] animate-[pulse_3s_infinite]"></div>
@@ -187,8 +185,8 @@ export default function BentoGrid() {
         className="bento-card p-6 flex flex-col justify-between group relative overflow-hidden cursor-pointer hover:shadow-2xl hover:shadow-red-500/10 transition-all duration-500"
         aria-label="Go to AdVerse"
         style={{
-          background: "radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.06), transparent 40%)",
-          backgroundColor: "#13162D"
+          background: "radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), var(--card-hover), transparent 40%)",
+          backgroundColor: "var(--card)"
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
@@ -204,11 +202,11 @@ export default function BentoGrid() {
 
         {/* Timeline UI */}
         <div className="mt-6 relative z-10">
-          <h3 className="text-lg font-bold text-white mb-0.5 flex items-center gap-2">
+          <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-0.5 flex items-center gap-2">
             AdVerse
             <i className="fa-solid fa-arrow-up-right-from-square text-[10px] opacity-50"></i>
           </h3>
-          <p className="text-xs text-red-300 font-mono mb-4">AI VIDEO STUDIO</p>
+          <p className="text-xs text-red-600 dark:text-red-300 font-mono mb-4">AI VIDEO STUDIO</p>
 
           <div className="glass-panel p-2 rounded-lg flex items-center gap-2 group-hover:bg-white/10 transition-colors">
             <div className="w-6 h-6 rounded-full bg-white text-midnight flex items-center justify-center text-[10px]">
@@ -227,13 +225,13 @@ export default function BentoGrid() {
       <div
         className="bento-card p-6 flex flex-col items-center justify-center relative overflow-hidden hover:shadow-2xl hover:shadow-white/5 transition-all duration-500"
         style={{
-          background: "radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.06), transparent 40%)",
-          backgroundColor: "#13162D"
+          background: "radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), var(--card-hover), transparent 40%)",
+          backgroundColor: "var(--card)"
         }}
       >
         <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(#444 1px, transparent 1px)', backgroundSize: '16px 16px' }}></div>
         <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
-          <i className="fa-solid fa-puzzle-piece text-9xl text-white"></i>
+          <i className="fa-solid fa-puzzle-piece text-9xl text-slate-900 dark:text-white"></i>
         </div>
         <div className="relative z-10 text-center">
           <div className="flex items-center justify-center -space-x-3 mb-4 float">
@@ -256,7 +254,7 @@ export default function BentoGrid() {
               +20
             </div>
           </div>
-          <h4 className="text-sm font-medium text-gray-300">Seamless Integrations</h4>
+          <h4 className="text-sm font-medium text-gray-600 dark:text-gray-300">Seamless Integrations</h4>
         </div>
       </div>
     </div>

@@ -30,10 +30,10 @@ export default function Hero() {
         </span>
         Unified Workspace v2.0
       </div>
-      <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold leading-[1.05] mb-6 tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/60 drop-shadow-sm">
+      <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold leading-[1.05] mb-6 tracking-tight text-slate-900 dark:text-white drop-shadow-sm">
         One hub, many<br className="hidden md:block" /> SaaS tools.
       </h1>
-      <p className="text-lg md:text-xl text-gray-400 mb-10 max-w-xl mx-auto leading-relaxed">
+      <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed">
         Replace your fragmented stack with a single, powerful workspace for forms, QR codes, and video generation.
       </p>
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
@@ -41,11 +41,10 @@ export default function Hero() {
           <span className="relative z-10">Get Started Free</span>
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out"></div>
         </button>
-        <button className="w-full sm:w-auto px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white font-medium hover:bg-white/10 transition-all text-sm flex items-center justify-center gap-2 backdrop-blur-sm">
+        <button className="w-full sm:w-auto px-8 py-4 rounded-full bg-white/5 border border-white/10 text-slate-900 dark:text-white font-medium hover:bg-white/10 transition-all text-sm flex items-center justify-center gap-2 backdrop-blur-sm">
           <i className="fa-regular fa-circle-play"></i> Watch Demo
         </button>
       </div>
     </div>
   );
 }
-
