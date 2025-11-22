@@ -8,6 +8,7 @@
 @layer base {
   body {
     @apply bg-midnight text-slate-100;
+    background-image: radial-gradient(circle at 50% 0%, #11132b 0%, #020205 70%);
     overflow-x: hidden;
   }
 }

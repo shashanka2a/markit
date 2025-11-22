@@ -9,14 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        midnight: '#050511',
-        surface: '#13162D',
+        midnight: '#020205', // Deeper black/blue
+        surface: '#0B0D1B', // Richer dark blue
         electric: '#2D7FF9',
         cyan: '#00E5FF',
         purple: '#8B5CF6',
-        card: 'rgba(255, 255, 255, 0.03)',
-        cardHover: 'rgba(255, 255, 255, 0.08)',
-        cardBorder: 'rgba(255, 255, 255, 0.12)',
+        card: 'rgba(255, 255, 255, 0.02)',
+        cardHover: 'rgba(255, 255, 255, 0.05)',
+        cardBorder: 'rgba(255, 255, 255, 0.08)',
       },
       fontFamily: {
         sans: ['"Plus Jakarta Sans"', 'sans-serif'],
