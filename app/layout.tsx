@@ -4,6 +4,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Markit.one - The Unified Marketing Stack",
   description: "Replace your fragmented stack with a single, powerful workspace for forms, QR codes, and video generation.",
+  icons: {
+    icon: '/logo.svg',
+  },
 };
 
 export default function RootLayout({

@@ -3,10 +3,10 @@ export default function Navigation() {
     <nav className="fixed w-full z-50 top-0 border-b border-white/10 bg-midnight/80 backdrop-blur-xl transition-all duration-300">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         <div className="flex items-center gap-3 group cursor-pointer">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-electric to-cyan-500 flex items-center justify-center shadow-lg shadow-electric/20 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-            <span className="text-white font-bold font-mono">M</span>
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-electric to-cyan-500 flex items-center justify-center shadow-lg shadow-electric/20 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 overflow-hidden">
+            <img src="/logo.svg" alt="Markit Logo" className="w-full h-full object-cover" />
           </div>
-          <span className="font-bold text-xl tracking-tight text-white group-hover:text-gray-200 transition-colors">Markit.one</span>
+          <span className="font-sans font-extrabold text-xl tracking-tighter text-white group-hover:text-gray-200 transition-colors">Markit.one</span>
         </div>
         <button className="md:hidden text-gray-300 hover:text-white p-2">
           <i className="fa-solid fa-bars text-xl"></i>
